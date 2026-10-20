@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://0cgiqstc4y68"]
+
+[ext_resource type="Script" uid="uid://csk84ykge8dtw" path="res://scripts/game_manager.gd" id="1_manager"]
+[ext_resource type="PackedScene" path="res://scenes/fighter.tscn" id="2_fighter"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="4_pause"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(2400, 40)
+
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(40, 900)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(200, 18)
+
+[node name="Main" type="Node2D" unique_id=1744283419]
+script = ExtResource("1_manager")
+
+[node name="Background" type="ColorRect" parent="." unique_id=413307570]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.11, 0.12, 0.19, 1)
+
+[node name="BackgroundAccent" type="ColorRect" parent="." unique_id=1438605280]
+offset_top = 430.0
+offset_right = 1152.0
+offset_bottom = 560.0
+mouse_filter = 2
+color = Color(0.15, 0.17, 0.26, 1)
+
+[node name="Stage" type="Node2D" parent="." unique_id=1641566970]
+
+[node name="Floor" type="StaticBody2D" parent="Stage" unique_id=392585001]
+position = Vector2(576, 580)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Floor" unique_id=2121686629]
+shape = SubResource("FloorShape")
+
+[node name="Visual" type="ColorRect" parent="Stage/Floor" unique_id=1704894599]
+offset_left = -576.0
+offset_top = -20.0
+offset_right = 576.0
+offset_bottom = 68.0
+mouse_filter = 2
+color = Color(0.27, 0.3, 0.4, 1)
+
+[node name="WallLeft" type="StaticBody2D" parent="Stage" unique_id=1608315784]
+position = Vector2(-20, 324)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/WallLeft" unique_id=1509642416]
+shape = SubResource("WallShape")
+
+[node name="WallRight" type="StaticBody2D" parent="Stage" unique_id=1817924520]
+position = Vector2(1172, 324)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/WallRight" unique_id=1039108376]
+shape = SubResource("WallShape")
+
+[node name="PlatformLeft" type="StaticBody2D" parent="Stage" unique_id=1969207410]
+position = Vector2(230, 440)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/PlatformLeft" unique_id=339201813]
+shape = SubResource("PlatformShape")
+one_way_collision = true
+
+[node name="Visual" type="ColorRect" parent="Stage/PlatformLeft" unique_id=736928975]
+offset_left = -100.0
+offset_top = -9.0
+offset_right = 100.0
+offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0.35, 0.39, 0.5, 1)
+
+[node name="PlatformRight" type="StaticBody2D" parent="Stage" unique_id=1118872534]
+position = Vector2(922, 440)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/PlatformRight" unique_id=194147048]
+shape = SubResource("PlatformShape")
+one_way_collision = true
+
+[node name="Visual" type="ColorRect" parent="Stage/PlatformRight" unique_id=1571161245]
+offset_left = -100.0
+offset_top = -9.0
+offset_right = 100.0
+offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0.35, 0.39, 0.5, 1)
+
+[node name="Fighters" type="Node2D" parent="." unique_id=1775024656]
+
+[node name="Player1" parent="Fighters" unique_id=1846923997 instance=ExtResource("2_fighter")]
+position = Vector2(360, 480)
+
+[node name="Player2" parent="Fighters" unique_id=1814288908 instance=ExtResource("2_fighter")]
+position = Vector2(792, 480)
+player_name = "JUGADOR 2"
+player_index = 2
+is_ai = true
+body_color = Color(0.3, 0.5, 0.95, 1)
+
+[node name="Effects" type="Node2D" parent="." unique_id=46565296]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1329090912]
+position = Vector2(576, 324)
+
+[node name="HUD" parent="." unique_id=2136640545 instance=ExtResource("3_hud")]
+
+[node name="PauseMenu" parent="." unique_id=438997876 instance=ExtResource("4_pause")]
